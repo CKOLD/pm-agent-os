@@ -1,0 +1,28 @@
+# Libraries: security fixes only (added 18 Nov 2026). Dependabot alerts email
+# Casper when a library here has a known flaw, and Dependabot security updates
+# open one PR per ecosystem with every fix in it (the "security" group).
+# `open-pull-requests-limit: 0` turns off ordinary version bumps, so there is
+# no PR noise for releases that fix nothing. Container images and the server
+# are covered by the weekly Trivy scan in parrot-vibes (docs/security-alerts.md).
+# Requires "Dependabot alerts" and "Dependabot security updates" on in the
+# repo's Settings > Advanced Security.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/apps/web"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    groups:
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
+  - package-ecosystem: "pip"
+    directory: "/apps/api"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    groups:
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
